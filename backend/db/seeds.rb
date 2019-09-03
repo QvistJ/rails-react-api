@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+Task.create(title: 'Setup api', description: 'This task is really big, since its everything from rails to react!', status: 'TODO', points: 100)
