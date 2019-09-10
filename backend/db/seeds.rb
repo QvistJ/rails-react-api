@@ -8,3 +8,4 @@
 
 
 Task.create(title: 'Setup api', description: 'This task is really big, since its everything from rails to react!', status: 'TODO', points: 100)
+Task.create(title: 'Noice api', description: 'Sick!', status: 'DONE', points: 25)
