@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 
 class Tasks extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class Tasks extends Component {
           <p>Description: {task.description}</p>
           <p>Status: {task.status}</p>
           <p>Points: {task.points}</p>
+          <Link to={"/task/" + task.id}>Link to it</Link>
           <p>____________________</p>
         </div>
       )
