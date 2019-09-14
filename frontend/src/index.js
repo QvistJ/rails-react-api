@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import App from './App'
 import Notfound from './Notfound'
-import Task from './Task';
+import Task from './Task'
+import Edit from './Edit'
 
 const routing = (
     <Router>
@@ -15,7 +16,8 @@ const routing = (
         </ul>
         <Switch>
           <Route exact path="/" component={App} />
-          <Route path="/task/:id" component={Task} />
+          <Route exact path="/task/:id" component={Task} />
+          <Route path="/task/:id/edit" component={Edit} />
           <Route component={Notfound} />
         </Switch>
       </div>
