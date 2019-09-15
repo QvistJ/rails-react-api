@@ -5,6 +5,7 @@ import App from './App'
 import Notfound from './Notfound'
 import Task from './Task'
 import Edit from './Edit'
+import Create from './Create'
 
 const routing = (
     <Router>
@@ -13,11 +14,15 @@ const routing = (
           <li>
             <Link to="/">Home</Link>
           </li>
+          <li>
+            <Link to="/create">Create New</Link>
+          </li>
         </ul>
         <Switch>
           <Route exact path="/" component={App} />
           <Route exact path="/task/:id" component={Task} />
           <Route path="/task/:id/edit" component={Edit} />
+          <Route path="/create" component={Create} />
           <Route component={Notfound} />
         </Switch>
       </div>

@@ -11,9 +11,6 @@ class Tasks extends Component {
   }
 
   handleTasks() {
-    console.log("in ths stif");
-    console.log(this.state.tasks);
-
     const allTasks = this.state.tasks.map((task) => {
       return (
         <div key={task.id}>
@@ -34,13 +31,9 @@ class Tasks extends Component {
   componentDidMount() {
     fetch('/tasks')
       .then(response => {
-        console.log("Here now1");
-        console.log(response);
         return response.json();
       })
       .then((tasks) => { 
-        console.log("Here now");
-        console.log(tasks);
         this.setState({tasks}); 
       });
     

@@ -15,11 +15,9 @@ class Task extends React.Component {
     const url = `/tasks/${ this.props.match.params.id}`
     fetch(url)
       .then(response => {
-        console.log(response);
         return response.json();
       })
       .then((task) => { 
-        console.log(task);
         this.setState({task}); 
       });
     

@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import {Link, Redirect } from 'react-router-dom'
+import React from 'react'
+import {Link, Redirect} from 'react-router-dom'
 
-class Edit extends Component {
+class Create extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       task: {
-        id: props.id,
         title: props.title,
         description: props.description,
         points: props.points,
@@ -20,55 +19,43 @@ class Edit extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    const url = `/tasks/${ this.props.match.params.id}`
-    fetch(url)
-      .then(response => {
-        return response.json();
-      })
-      .then((task) => { 
-        this.setState({task}); 
-      });
-    
-  }
-
   updateTask(key, value) {
+    console.log(key);
+    console.log(value);
     this.setState(prevState => ({
       task: {
         ...prevState.task,
         [key]: value,
       },
     }));
+    console.log(this.state);
   }
 
   handleChange(event) {
     const { target } = event;
     const { name } = target;
     const value = target.value;
-    console.log(event);
-    console.log(target.value);
     this.updateTask(name, value);
   }
   
   handleSubmit(event) {
     event.preventDefault();
     const sendToAPI = this.state.task
-    console.log(sendToAPI);
-    const url = `/tasks/${ this.props.match.params.id}`
+    const url = "/tasks"
     fetch(url, {
-      method: 'PATCH',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id: sendToAPI.id,
         title: sendToAPI.title,
         description: sendToAPI.description,
         points: sendToAPI.points,
         status: sendToAPI.status,
       })
     })
+
     this.setState(prevState => ({
       ...prevState.task,
       redirect: true,
@@ -78,7 +65,7 @@ class Edit extends Component {
   render (){
     const { task } = this.state;
     if (this.state.redirect) {
-      return <Redirect to={"/task/" +  task.id}/>;
+      return <Redirect to="/" />;
     }
     return (
       <div>
@@ -98,12 +85,13 @@ class Edit extends Component {
           <div>
             <label>
               <strong>Description:</strong>
-              <textarea 
+              <input
                 type="textarea"
                 id="description"
                 name="description"
-                value={task.description} 
-                onChange={this.handleChange} />
+                value={task.description}
+                onChange={this.handleChange}
+              />
             </label>
           </div>
           <div>
@@ -129,14 +117,13 @@ class Edit extends Component {
               </select>
             </label>
             <div>
-              <input type="submit" value="update" />
+              <input type="submit" value="Create" />
             </div>
           </div>
         </form>
-        <Link to={"/task/" + this.state.task.id}>Go back</Link>
       </div>
     )
   }
 }
 
-export default Edit
+export default Create
