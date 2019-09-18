@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 
 class Task extends React.Component {
   constructor(props) {
@@ -7,7 +7,10 @@ class Task extends React.Component {
 
     this.state = {
       task: [],
+      redirect: false,
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
@@ -23,7 +26,23 @@ class Task extends React.Component {
     
   }
 
+  handleSubmit (id) {
+    return event => {
+      event.preventDefault()
+      const url = `/tasks/${id}`
+      fetch(url, {
+        method: 'DELETE'
+      })
+      this.setState({
+        redirect: true,
+      })
+    }
+  }
+
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    }
     return (
       <div>
         <Link to={"/"}>Go back</Link>
@@ -34,6 +53,7 @@ class Task extends React.Component {
         <p>{this.state.task.created_at}</p>
         <p>{this.state.task.updated_at}</p>
         <Link to={"/task/" + this.state.task.id + "/edit"}>Edit</Link>
+        <button onClick={this.handleSubmit(this.state.task.id)}>Delete Task</button>
       </div>
     )
   }

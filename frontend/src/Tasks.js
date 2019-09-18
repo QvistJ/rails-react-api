@@ -9,9 +9,6 @@ class Tasks extends Component {
     this.state = {
       tasks: [],
     };
-
-    this.getAllTasks = this.getAllTasks.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleTasks() {
@@ -24,7 +21,6 @@ class Tasks extends Component {
           <p>Status: {task.status}</p>
           <p>Points: {task.points}</p>
           <Link to={"/task/" + task.id}>Link to it</Link>
-          <button onClick={this.handleSubmit(task.id)}>Delete Task</button>
           <p>____________________</p>
         </div>
       )
@@ -34,40 +30,13 @@ class Tasks extends Component {
   }
 
   // <Destroy taskId={task.id} onclick={this.handleSubmit}/>
-  
-  handleSubmit (id) {
-    return event => {
-      event.preventDefault()
-      console.log("CLICKED ME");
-      const url = `/tasks/${id}`
-      fetch(url, {
-        method: 'DELETE'
-      })
-
-      setTimeout(this.getAllTasks,
-        2
-      )
-    }
-  }
-
-  getAllTasks() {
-    fetch('/tasks')
-      .then(response => {
-        return response.json();
-      })
-      .then((tasks) => { 
-        console.log(tasks)
-        this.setState({tasks}); 
-      });
-  }
 
   componentDidMount() {
     fetch('/tasks')
       .then(response => {
         return response.json();
       })
-      .then((tasks) => { 
-        console.log(tasks)
+      .then((tasks) => {
         this.setState({tasks}); 
       });
   }

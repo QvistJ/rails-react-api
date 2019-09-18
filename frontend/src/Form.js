@@ -1,22 +1,69 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
+import {Link, Redirect } from 'react-router-dom'
 
-class Create extends React.Component {
+class Form extends React.Component {
   constructor(props) {
-    super(props);
-
+    super(props)
+  
     this.state = {
       task: {
-        title: props.title,
-        description: props.description,
-        points: props.points,
-        status: props.status,
+        id: null,
+        title: '',
+        description: '',
+        points: 0,
+        status: 'TODO',
       },
       redirect: false,
-    };
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.taskId) {
+      const url = `/tasks/${ this.props.taskId}`
+      fetch(url)
+      .then(response => {
+        return response.json();
+      })
+      .then((task) => { 
+        this.setState({task}); 
+      });
+    } else {
+      console.log() // for create
+    }
+  }
+
+  handleChange(event) {
+    const { target } = event;
+    const { name } = target;
+    const value = target.value;
+    this.updateTask(name, value);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const sendToAPI = this.state.task
+    const url = `/tasks/${ this.state.task.id}`
+    fetch(url, {
+      method: 'PATCH', //state 
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: sendToAPI.id,
+        title: sendToAPI.title,
+        description: sendToAPI.description,
+        points: sendToAPI.points,
+        status: sendToAPI.status,
+      })
+    })
+    this.setState(prevState => ({
+      ...prevState.task,
+      redirect: true,
+    }));
   }
 
   updateTask(key, value) {
@@ -28,41 +75,10 @@ class Create extends React.Component {
     }));
   }
 
-  handleChange(event) {
-    const { target } = event;
-    const { name } = target;
-    const value = target.value;
-    this.updateTask(name, value);
-  }
-  
-  handleSubmit(event) {
-    event.preventDefault();
-    const sendToAPI = this.state.task
-    const url = "/tasks"
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: sendToAPI.title,
-        description: sendToAPI.description,
-        points: sendToAPI.points,
-        status: sendToAPI.status,
-      })
-    })
-
-    this.setState(prevState => ({
-      ...prevState.task,
-      redirect: true,
-    }));
-  }
-
-  render (){
+  render() {
     const { task } = this.state;
     if (this.state.redirect) {
-      return <Redirect to="/" />;
+      return <Redirect to={"/task/" +  task.id}/>;
     }
     return (
       <div>
@@ -74,7 +90,7 @@ class Create extends React.Component {
                 type="text"
                 id="title"
                 name="title"
-                value={task.title}
+                value={this.state.task.title}
                 onChange={this.handleChange}
               />
             </label>
@@ -82,13 +98,12 @@ class Create extends React.Component {
           <div>
             <label>
               <strong>Description:</strong>
-              <input
+              <textarea 
                 type="textarea"
                 id="description"
                 name="description"
-                value={task.description}
-                onChange={this.handleChange}
-              />
+                value={this.state.task.description} 
+                onChange={this.handleChange} />
             </label>
           </div>
           <div>
@@ -98,7 +113,7 @@ class Create extends React.Component {
                 type="number"
                 id="points"
                 name="points"
-                value={task.points}
+                value={this.state.task.points}
                 onChange={this.handleChange}
               />
             </label>
@@ -114,13 +129,16 @@ class Create extends React.Component {
               </select>
             </label>
             <div>
-              <input type="submit" value="Create" />
+              <input type="submit" value="update" />
             </div>
           </div>
         </form>
+        <Link to={"/task/" + this.state.task.id}>Go back</Link>
       </div>
     )
   }
 }
 
-export default Create
+
+
+export default Form

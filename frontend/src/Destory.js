@@ -8,7 +8,6 @@ class Destroy extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log("CLICKED ME");
     event.preventDefault();
     const url = `/tasks/${this.props.taskId}`
     fetch(url, {
@@ -17,7 +16,6 @@ class Destroy extends React.Component {
   }
 
   render() {
-    console.log(this.props.taskId)
     return (
     <button onClick={this.handleSubmit}>Delete Task</button>
     )
