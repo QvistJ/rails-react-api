@@ -31,7 +31,17 @@ class Form extends React.Component {
         this.setState({task}); 
       });
     } else {
-      console.log() // for create
+      console.log() // for create, url needed and method for different create/edit
+      this.setState({
+        task: {
+          title: '',
+          description: '',
+          points: 0,
+          status: 'TODO',
+        },
+        redirect: false,
+        url: '/'
+      })
     }
   }
 
