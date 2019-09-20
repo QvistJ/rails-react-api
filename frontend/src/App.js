@@ -5,9 +5,7 @@ import Tasks from './Tasks';
 class App extends Component {
   render (){
     return (
-      <div>
-        <Tasks />
-      </div>
+      <Tasks />
     )
   }
 }

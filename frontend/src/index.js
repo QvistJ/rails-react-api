@@ -6,16 +6,17 @@ import Notfound from './Notfound'
 import Task from './Task'
 import Edit from './Edit'
 import Create from './Create'
+import './index.css'
 
 const routing = (
     <Router>
       <div>
-        <ul>
+        <ul className="nav">
           <li>
-            <Link to="/">Home</Link>
+            <Link className="navbtn" to="/">Home</Link>
           </li>
           <li>
-            <Link to="/create">Create New</Link>
+            <Link className="navbtn" to="/create">Create New</Link>
           </li>
         </ul>
         <Switch>

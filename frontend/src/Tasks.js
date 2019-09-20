@@ -14,22 +14,19 @@ class Tasks extends Component {
   handleTasks() {
     const allTasks = this.state.tasks.map((task) => {
       return (
-        <div key={task.id}>
-          <p>____________________</p>
-          <h2>{task.title}</h2>
-          <p>Description: {task.description}</p>
-          <p>Status: {task.status}</p>
-          <p>Points: {task.points}</p>
-          <Link to={"/task/" + task.id}>Link to it</Link>
-          <p>____________________</p>
+        <div>
+          <hr className="taskLine"></hr>
+          <div className="taskCard" key={task.id}>
+            <h2>{task.title}</h2>
+            <p>Status: {task.status}</p>
+            <Link className="taskbtn" to={"/task/" + task.id}>Go to Task</Link>
+          </div>
         </div>
       )
     })
 
     return <div>{allTasks}</div>
   }
-
-  // <Destroy taskId={task.id} onclick={this.handleSubmit}/>
 
   componentDidMount() {
     fetch('/tasks')
@@ -43,9 +40,9 @@ class Tasks extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Tasks:</h1>
-        {this.handleTasks()}
+      <div className="tasks">
+        <h1>Tasks</h1>
+        <div className="width50">{this.handleTasks()}</div>
       </div>
     )
   }

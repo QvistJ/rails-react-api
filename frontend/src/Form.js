@@ -94,16 +94,15 @@ class Form extends React.Component {
   }
 
   render() {
-    const { task } = this.state;
     if (this.state.redirect) {
       return <Redirect to={this.state.redirectURL}/>;
     }
     return (
-      <div>
+      <div className="taskTab">
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>
-              <strong>Title:</strong>
+              <strong>Title</strong>
               <input
                 type="text"
                 id="title"
@@ -115,7 +114,7 @@ class Form extends React.Component {
           </div>
           <div>
             <label>
-              <strong>Description:</strong>
+              <strong >Description</strong>
               <textarea 
                 type="textarea"
                 id="description"
@@ -126,7 +125,7 @@ class Form extends React.Component {
           </div>
           <div>
             <label>
-              <strong>Points:</strong>
+              <strong>Points</strong>
               <input
                 type="number"
                 id="points"
@@ -138,7 +137,7 @@ class Form extends React.Component {
           </div>
           <div>
             <label>
-              <strong>Status:</strong>
+              <strong>Status</strong>
               <select id="status" name="status" value={this.state.task.status} onChange={this.handleChange}>
                 <option value="Done">Done</option>
                 <option value="TODO">TODO</option>
@@ -147,11 +146,11 @@ class Form extends React.Component {
               </select>
             </label>
             <div>
-              <input type="submit" value="update" />
+              <input type="submit" value="Submit" />
             </div>
           </div>
         </form>
-        <Link to={"/task/" + this.state.task.id}>Go back</Link>
+        <Link className="taskbtn2" to={this.state.redirectURL}>Go back</Link>
       </div>
     )
   }

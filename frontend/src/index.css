@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -10,4 +11,136 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.nav {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #34495e;
+  justify-content: space-around;
+}
+
+.navbtn {
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.navbtn:hover{
+  background-color: white;
+  color: #34495e;
+}
+
+.tasks{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%
+}
+
+.taskCard{
+  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+.taskLine{
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.width50 {
+  width: 50%;
+}
+
+.taskbtn {
+  font-size: 14px;
+  color: #34495e;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid #34495e; 
+}
+
+.taskbtn:hover{
+  background-color: #34495e;
+  color: white;
+}
+
+.taskbtn2 {
+  height: 33px;
+  font-size: 14px;
+  color: #34495e;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: white;
+  border: 2px solid #34495e; 
+
+}
+
+.taskbtn2:hover{
+  background-color: #34495e;
+  color: white;
+}
+
+
+.taskTab{
+  margin-left: 5%;
+  margin-top: 5%;
+  width: 15%;
+}
+
+.btn-space {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.top-marg {
+  margin-top: 50px;
+}
+
+input[type=text], input[type=number], textarea, select {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+input[type=submit] {
+  width: 100%;
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #34495e;
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid #34495e; 
+}
+
+input[type=submit]:hover {
+  background-color: #34495e;
+  color:white;
 }

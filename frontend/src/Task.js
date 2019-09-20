@@ -44,16 +44,18 @@ class Task extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <div>
-        <Link to={"/"}>Go back</Link>
+      <div className="taskTab">
+        <Link className="taskbtn" to={"/"}>Back</Link>
         <h1>{this.state.task.title}</h1>
         <p>{this.state.task.description}</p>
         <p>{this.state.task.points}</p>
         <p>{this.state.task.status}</p>
         <p>{this.state.task.created_at}</p>
         <p>{this.state.task.updated_at}</p>
-        <Link to={"/task/" + this.state.task.id + "/edit"}>Edit</Link>
-        <button onClick={this.handleSubmit(this.state.task.id)}>Delete Task</button>
+        <div className="btn-space">
+          <Link className="taskbtn" to={"/task/" + this.state.task.id + "/edit"}>Edit</Link>
+          <button className="taskbtn2" onClick={this.handleSubmit(this.state.task.id)}>Delete Task</button>
+        </div>
       </div>
     )
   }
