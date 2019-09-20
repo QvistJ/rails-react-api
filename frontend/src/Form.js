@@ -27,11 +27,16 @@ class Form extends React.Component {
       .then(response => {
         return response.json();
       })
-      .then((task) => { 
-        this.setState({task}); 
+      .then((task) => {
+        this.setState({
+          task: task,
+          redirect: false, 
+          url: `/tasks/${this.props.taskId}`,
+          redirectURL: `/task/${this.props.taskId}`,
+          method: 'PATCH',
+        }); 
       });
-    } else {
-      console.log() // for create, url needed and method for different create/edit
+    } else { // for create, url needed and method for different create/edit
       this.setState({
         task: {
           title: '',
@@ -40,7 +45,9 @@ class Form extends React.Component {
           status: 'TODO',
         },
         redirect: false,
-        url: '/'
+        url: '/tasks',
+        redirectURL: '/',
+        method: 'POST',
       })
     }
   }
@@ -55,9 +62,8 @@ class Form extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const sendToAPI = this.state.task
-    const url = `/tasks/${ this.state.task.id}`
-    fetch(url, {
-      method: 'PATCH', //state 
+    fetch(this.state.url, {
+      method: this.state.method,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -82,13 +88,15 @@ class Form extends React.Component {
         ...prevState.task,
         [key]: value,
       },
+      ...prevState.redirect,
+      ...prevState.url,
     }));
   }
 
   render() {
     const { task } = this.state;
     if (this.state.redirect) {
-      return <Redirect to={"/task/" +  task.id}/>;
+      return <Redirect to={this.state.redirectURL}/>;
     }
     return (
       <div>
